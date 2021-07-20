@@ -13,7 +13,7 @@
 - .Net Framework 4
 
 ### Install 
-Download [stable release](https://github.com/csutorasa/XOutput/releases/latest) or build it with Visual Studio.
+Download [stable release](https://github.com/Cai1Hsu/BlackShark2Driver/releases/latest) or build it with Visual Studio.
 
 ## Thanks to
 - [csutorasa/XOutput](https://github.com/csutorasa/XOutput)
