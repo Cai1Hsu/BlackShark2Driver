@@ -4,7 +4,7 @@
 ## How to install
 
 ### Install emulation software
-- Install VIGEm framework (recommended)
+- Install [VIGEm](https://github.com/ViGEm/ViGEmBus/releases/download/setup-v1.16.116/ViGEmBus_Setup_1.16.116.exe) framework
 
 ### Install dependencies:
 - DirectX
