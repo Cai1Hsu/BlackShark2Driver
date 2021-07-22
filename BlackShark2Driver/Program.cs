@@ -1,15 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using XOutput.Devices;
-=======
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using XOutput.Devices;
-using XOutput.Devices.Input;
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 using XOutput.Devices.Input.DirectInput;
 using XOutput.Devices.Mapper;
 using XOutput.Devices.XInput.Vigem;
@@ -28,12 +19,7 @@ namespace BlackShark2Driver
             Console.WriteLine("Author : Cai1Hsu (x1052819745@163.com)");
             Console.WriteLine("---------------------------------------");
 
-<<<<<<< HEAD
             if (VigemDevice.IsAvailable())
-=======
-            bool vigem = VigemDevice.IsAvailable();
-            if (vigem)
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 Console.WriteLine("[OK] Vigem is installed.");
             }
@@ -58,26 +44,16 @@ namespace BlackShark2Driver
                     inputdevices.Add(i);
                 }
             }
-<<<<<<< HEAD
             if (index == 0)
             {
                 Console.WriteLine("\a[!] No device found.");
-=======
-            if(index == 0)
-            {
-                Console.WriteLine("\a[!] No devices found.");
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 Console.ReadKey(true);
                 return;
             }
             int deviceNumber = -1;
             if (index == 1)
             {
-<<<<<<< HEAD
                 Console.WriteLine("[!] The only device was chosen by default.");
-=======
-                Console.WriteLine("[!] The only device is chosen by default.");
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 deviceNumber = 0;
             }
             else
@@ -92,11 +68,7 @@ namespace BlackShark2Driver
                 }
                 catch (FormatException)
                 {
-<<<<<<< HEAD
                     Console.WriteLine("[!] Invalid number, please reinput.");
-=======
-                    Console.WriteLine("[!] Invalid number, please retry.");
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                     goto InputNumber;
                 }
             }
@@ -105,7 +77,6 @@ namespace BlackShark2Driver
 
             Console.WriteLine($"Chosen controller : {controller.InstanceName} {controller.InstanceGuid}");
             InputMapper inputMapper = JsonConvert.DeserializeObject<InputMapper>(Properties.Resources.Mapper.Replace("####", controller.InstanceGuid.ToString()));
-<<<<<<< HEAD
 
             GameController emulatedController = new GameController(inputMapper);
             Controllers.Instance.Add(emulatedController);
@@ -116,16 +87,6 @@ namespace BlackShark2Driver
             Console.ReadKey(true);
             emulatedController.Stop();
             Console.CursorVisible = true;
-=======
-            
-            GameController emulatedController = new GameController(inputMapper);
-            Controllers.Instance.Add(emulatedController);
-
-            System.Threading.Thread.Sleep(500);
-            emulatedController.Start(null);
-            Console.ReadKey(true);
-            emulatedController.Stop();
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
         }
     }
 }

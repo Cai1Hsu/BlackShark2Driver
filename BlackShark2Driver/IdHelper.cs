@@ -17,11 +17,7 @@ namespace XOutput.Tools
             {
                 return null;
             }
-<<<<<<< HEAD
             Match match = hidForRegistryRegex.Match(path);
-=======
-            var match = hidForRegistryRegex.Match(path);
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (match.Success)
             {
                 string harwareIdFromRegistry = GetHardwareIdFromRegistryWithHidMatch(match);

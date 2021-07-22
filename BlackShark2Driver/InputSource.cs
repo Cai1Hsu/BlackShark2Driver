@@ -89,11 +89,7 @@ namespace XOutput.Devices
     public class DisabledInputSource : InputSource
     {
         public static InputSource Instance => instance;
-<<<<<<< HEAD
         private static readonly InputSource instance = new DisabledInputSource();
-=======
-        private static InputSource instance = new DisabledInputSource();
->>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 
         private DisabledInputSource() : base(null, "", InputSourceTypes.Disabled, 0)
         {
