@@ -15,6 +15,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+<<<<<<< HEAD
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -34,6 +35,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+=======
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,19 +49,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+<<<<<<< HEAD
     <PlatformTarget>x64</PlatformTarget>
+=======
+    <PlatformTarget>AnyCPU</PlatformTarget>
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+<<<<<<< HEAD
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+=======
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+<<<<<<< HEAD
   <PropertyGroup>
     <ManifestCertificateThumbprint>FC5054AAD855B4A60C1128964FF1272007A61C42</ManifestCertificateThumbprint>
   </PropertyGroup>
@@ -77,6 +88,8 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+=======
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
   <ItemGroup>
     <Reference Include="Costura, Version=3.3.3.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.3.3\lib\net40\Costura.dll</HintPath>
@@ -106,7 +119,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ControllerDrawer.cs" />
+=======
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
     <Compile Include="Controllers.cs" />
     <Compile Include="DeviceDisconnectedEventArgs.cs" />
     <Compile Include="DeviceInputChangedEventArgs.cs" />
@@ -136,6 +152,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RegistryModifier.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Settings.cs" />
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
     <Compile Include="SourceChangedEventArgs.cs" />
     <Compile Include="VigemDevice.cs" />
     <Compile Include="VigemXBox360Mappings.cs" />
@@ -147,9 +167,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+<<<<<<< HEAD
     <None Include="BlackShark2Driver_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+=======
+    <None Include="packages.config" />
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -157,6 +181,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
@@ -169,6 +194,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+=======
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

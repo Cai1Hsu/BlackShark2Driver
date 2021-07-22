@@ -73,14 +73,24 @@ namespace XOutput.Devices.Mapper
         public void Attach(IEnumerable<IInputDevice> inputDevices)
         {
             inputs.Clear();
+<<<<<<< HEAD
             foreach (KeyValuePair<XInputTypes, MapperDataCollection> mapping in Mappings)
             {
                 foreach (MapperData mapperData in mapping.Value.Mappers)
+=======
+            foreach (var mapping in Mappings)
+            {
+                foreach (var mapperData in mapping.Value.Mappers)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 {
                     bool found = false;
                     if (mapperData.InputDevice != null && mapperData.InputType != null)
                     {
+<<<<<<< HEAD
                         foreach (IInputDevice inputDevice in inputDevices)
+=======
+                        foreach (var inputDevice in inputDevices)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                         {
                             if (mapperData.InputDevice == inputDevice.UniqueId)
                             {
@@ -107,7 +117,12 @@ namespace XOutput.Devices.Mapper
         /// <returns></returns>
         protected static double TryReadValue(string data, double defaultValue = 0)
         {
+<<<<<<< HEAD
             if (double.TryParse(data, out double value))
+=======
+            double value;
+            if (double.TryParse(data, out value))
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 return value / 100;
             }

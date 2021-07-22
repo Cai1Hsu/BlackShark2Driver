@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 ﻿using Microsoft.Win32;
 using System;
+=======
+﻿using System;
+using Microsoft.Win32;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 using System.Diagnostics;
 
 namespace XOutput.Tools
@@ -28,7 +33,11 @@ namespace XOutput.Tools
         {
             get
             {
+<<<<<<< HEAD
                 using (RegistryKey key = GetRegistryKey())
+=======
+                using (var key = GetRegistryKey())
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 {
                     bool exists = key.GetValue(AutostartValueKey) != null;
                     Console.WriteLine($"{AutostartValueKey} registry is " + (exists ? "" : "not ") + "found");
@@ -53,9 +62,15 @@ namespace XOutput.Tools
         /// </summary>
         public void SetAutostart()
         {
+<<<<<<< HEAD
             using (RegistryKey key = GetRegistryKey())
             {
                 string filename = Process.GetCurrentProcess().MainModule.FileName;
+=======
+            using (var key = GetRegistryKey())
+            {
+                var filename = Process.GetCurrentProcess().MainModule.FileName;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 string value = $"\"{filename}\" {AutostartParams}";
                 key.SetValue(AutostartValueKey, value);
                 Console.WriteLine($"{AutostartValueKey} registry set to {value}");
@@ -67,7 +82,11 @@ namespace XOutput.Tools
         /// </summary>
         public void ClearAutostart()
         {
+<<<<<<< HEAD
             using (RegistryKey key = GetRegistryKey())
+=======
+            using (var key = GetRegistryKey())
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 key.DeleteValue(AutostartValueKey);
                 Console.WriteLine($"{AutostartValueKey} registry is deleted");
@@ -81,7 +100,11 @@ namespace XOutput.Tools
 
         public static bool KeyExists(RegistryKey registryKey, string subkey)
         {
+<<<<<<< HEAD
             using (RegistryKey registry = registryKey.OpenSubKey(subkey))
+=======
+            using (var registry = registryKey.OpenSubKey(subkey))
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 return registry != null;
             }
@@ -95,7 +118,11 @@ namespace XOutput.Tools
 
         public static void CreateKey(RegistryKey registryKey, string subkey)
         {
+<<<<<<< HEAD
             RegistryKey registry = registryKey.CreateSubKey(subkey);
+=======
+            var registry = registryKey.CreateSubKey(subkey);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             registry.Close();
         }
 
@@ -106,7 +133,11 @@ namespace XOutput.Tools
 
         public static void SetValue(RegistryKey registryKey, string subkey, string key, object value)
         {
+<<<<<<< HEAD
             using (RegistryKey registry = registryKey.OpenSubKey(subkey, true))
+=======
+            using (var registry = registryKey.OpenSubKey(subkey, true))
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 registry.SetValue(key, value);
             }

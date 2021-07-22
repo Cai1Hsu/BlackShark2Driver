@@ -25,7 +25,11 @@ namespace XOutput.Devices.Mapper
             get => source;
             set
             {
+<<<<<<< HEAD
                 InputSource newValue = value ?? DisabledInputSource.Instance;
+=======
+                var newValue = value ?? DisabledInputSource.Instance;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 if (newValue != source)
                 {
                     source = newValue;
@@ -47,7 +51,11 @@ namespace XOutput.Devices.Mapper
         /// </summary>
         public double Deadzone { get; set; }
 
+<<<<<<< HEAD
         private InputSource source;
+=======
+        InputSource source;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 
         public MapperData()
         {
@@ -73,7 +81,11 @@ namespace XOutput.Devices.Mapper
             }
             else
             {
+<<<<<<< HEAD
                 double readvalue = value;
+=======
+                var readvalue = value;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 if (Math.Abs(value - 0.5) < Deadzone)
                 {
                     readvalue = 0.5;
@@ -91,9 +103,15 @@ namespace XOutput.Devices.Mapper
             }
             return mappedValue;
         }
+<<<<<<< HEAD
         public void SetSourceWithoutSaving(InputSource value)
         {
             InputSource newValue = value ?? DisabledInputSource.Instance;
+=======
+        public void SetSourceWithoutSaving(InputSource value) 
+        {
+            var newValue = value ?? DisabledInputSource.Instance;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (newValue != source)
             {
                 source = newValue;

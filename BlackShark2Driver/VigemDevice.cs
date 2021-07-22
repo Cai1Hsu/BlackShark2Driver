@@ -52,7 +52,11 @@ namespace XOutput.Devices.XInput.Vigem
         /// <returns>If it was successful</returns>
         public bool Plugin(int controllerCount)
         {
+<<<<<<< HEAD
             IXbox360Controller controller = client.CreateXbox360Controller();
+=======
+            var controller = client.CreateXbox360Controller();
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             controller.Connect();
             controllers.Add(controllerCount, controller);
             return true;
@@ -67,7 +71,11 @@ namespace XOutput.Devices.XInput.Vigem
         {
             if (controllers.ContainsKey(controllerCount))
             {
+<<<<<<< HEAD
                 IXbox360Controller controller = controllers[controllerCount];
+=======
+                var controller = controllers[controllerCount];
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 controllers.Remove(controllerCount);
                 controller.Disconnect();
                 return true;
@@ -85,22 +93,39 @@ namespace XOutput.Devices.XInput.Vigem
         {
             if (controllers.ContainsKey(controllerCount))
             {
+<<<<<<< HEAD
                 IXbox360Controller controller = controllers[controllerCount];
                 foreach (KeyValuePair<XInputTypes, double> value in values)
                 {
                     if (value.Key.IsAxis())
                     {
                         VigemXbox360AxisMapping mapping = axisMappings[value.Key];
+=======
+                var controller = controllers[controllerCount];
+                foreach (var value in values)
+                {
+                    if (value.Key.IsAxis())
+                    {
+                        var mapping = axisMappings[value.Key];
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                         controller.SetAxisValue(mapping.Type, mapping.GetValue(value.Value));
                     }
                     else if (value.Key.IsSlider())
                     {
+<<<<<<< HEAD
                         VigemXbox360SliderMapping mapping = sliderMappings[value.Key];
+=======
+                        var mapping = sliderMappings[value.Key];
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                         controller.SetSliderValue(mapping.Type, mapping.GetValue(value.Value));
                     }
                     else
                     {
+<<<<<<< HEAD
                         VigemXbox360ButtonMapping mapping = buttonMappings[value.Key];
+=======
+                        var mapping = buttonMappings[value.Key];
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                         controller.SetButtonState(mapping.Type, mapping.GetValue(value.Value));
                     }
                 }
@@ -111,7 +136,11 @@ namespace XOutput.Devices.XInput.Vigem
 
         public void Dispose()
         {
+<<<<<<< HEAD
             foreach (IXbox360Controller controller in controllers.Values)
+=======
+            foreach (var controller in controllers.Values)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 controller.Disconnect();
             }

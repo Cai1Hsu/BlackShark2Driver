@@ -65,12 +65,20 @@ namespace XOutput.Devices.XInput
 
         public void UpdateSources(IEnumerable<IInputDevice> sources)
         {
+<<<<<<< HEAD
             foreach (IInputDevice source in boundSources)
+=======
+            foreach (var source in boundSources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 source.InputChanged -= SourceInputChanged;
             }
             boundSources = sources;
+<<<<<<< HEAD
             foreach (IInputDevice source in boundSources)
+=======
+            foreach (var source in boundSources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 source.InputChanged += SourceInputChanged;
             }
@@ -79,7 +87,11 @@ namespace XOutput.Devices.XInput
 
         public void Dispose()
         {
+<<<<<<< HEAD
             foreach (IInputDevice source in boundSources)
+=======
+            foreach (var source in boundSources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 source.InputChanged -= SourceInputChanged;
             }
@@ -108,17 +120,28 @@ namespace XOutput.Devices.XInput
         public bool RefreshInput(bool force = false)
         {
             state.ResetChanges();
+<<<<<<< HEAD
             foreach (XOutputSource s in sources)
+=======
+            foreach (var s in sources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 if (s.Refresh(mapper))
                 {
                     state.MarkChanged(s);
                 }
             }
+<<<<<<< HEAD
             IEnumerable<InputSource> changes = state.GetChanges(force);
             dPads[0] = DPadHelper.GetDirection(GetBool(XInputTypes.UP), GetBool(XInputTypes.DOWN), GetBool(XInputTypes.LEFT), GetBool(XInputTypes.RIGHT));
             state.SetDPad(0, dPads[0]);
             IEnumerable<int> changedDPads = state.GetChangedDpads(force);
+=======
+            var changes = state.GetChanges(force);
+            dPads[0] = DPadHelper.GetDirection(GetBool(XInputTypes.UP), GetBool(XInputTypes.DOWN), GetBool(XInputTypes.LEFT), GetBool(XInputTypes.RIGHT));
+            state.SetDPad(0, dPads[0]);
+            var changedDPads = state.GetChangedDpads(force);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (changedDPads.Any() || changes.Any())
             {
                 deviceInputChangedEventArgs.Refresh(changes, changedDPads);
@@ -133,8 +156,13 @@ namespace XOutput.Devices.XInput
         /// <returns></returns>
         public Dictionary<XInputTypes, double> GetValues()
         {
+<<<<<<< HEAD
             Dictionary<XInputTypes, double> newValues = new Dictionary<XInputTypes, double>();
             foreach (XOutputSource source in sources)
+=======
+            var newValues = new Dictionary<XInputTypes, double>();
+            foreach (var source in sources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 newValues[source.XInputType] = source.Value;
             }

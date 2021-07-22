@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿namespace XOutput.Devices.Input
+=======
+﻿using System;
+
+namespace XOutput.Devices.Input
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 {
     /// <summary>
     /// Main interface of input devices.

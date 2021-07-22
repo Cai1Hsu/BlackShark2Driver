@@ -41,7 +41,11 @@ namespace XOutput.Devices
         /// <returns>changed DPad indices</returns>
         public bool SetDPad(int i, DPadDirection newValue)
         {
+<<<<<<< HEAD
             DPadDirection oldValue = dPads[i];
+=======
+            var oldValue = dPads[i];
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (newValue != oldValue)
             {
                 dPads[i] = newValue;

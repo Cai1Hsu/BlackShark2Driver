@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 ﻿using SharpDX;
+=======
+﻿using Microsoft.Win32;
+using SharpDX;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 using SharpDX.DirectInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+<<<<<<< HEAD
+=======
+using System.Windows;
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
 using XOutput.Tools;
 
 namespace XOutput.Devices.Input.DirectInput
@@ -27,7 +36,11 @@ namespace XOutput.Devices.Input.DirectInput
         /// <summary>
         /// Triggered periodically to trigger input read from Direct input device.
         /// <para>Implements <see cref="IDevice.InputChanged"/></para>
+<<<<<<< HEAD
         /// </summary>k
+=======
+        /// </summary>
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
         public event DeviceInputChangedHandler InputChanged;
         /// <summary>
         /// Triggered when the any read or write fails.
@@ -121,10 +134,17 @@ namespace XOutput.Devices.Input.DirectInput
         {
             this.deviceInstance = deviceInstance;
             this.joystick = joystick;
+<<<<<<< HEAD
             DeviceObjectInstance[] buttonObjectInstances = joystick.GetObjects(DeviceObjectTypeFlags.Button).Where(b => b.Usage > 0).OrderBy(b => b.ObjectId.InstanceNumber).Take(128).ToArray();
             DirectInputSource[] buttons = buttonObjectInstances.Select((b, i) => new DirectInputSource(this, "Button " + b.Usage, InputSourceTypes.Button, b.Offset, state => state.Buttons[i] ? 1 : 0)).ToArray();
             IEnumerable<DirectInputSource> axes = GetAxes().OrderBy(a => a.Usage).Take(24).Select(GetAxisSource);
             IEnumerable<DirectInputSource> sliders = GetSliders().OrderBy(a => a.Usage).Select(GetSliderSource);
+=======
+            var buttonObjectInstances = joystick.GetObjects(DeviceObjectTypeFlags.Button).Where(b => b.Usage > 0).OrderBy(b => b.ObjectId.InstanceNumber).Take(128).ToArray();
+            var buttons = buttonObjectInstances.Select((b, i) => new DirectInputSource(this, "Button " + b.Usage, InputSourceTypes.Button, b.Offset, state => state.Buttons[i] ? 1 : 0)).ToArray();
+            var axes = GetAxes().OrderBy(a => a.Usage).Take(24).Select(GetAxisSource);
+            var sliders = GetSliders().OrderBy(a => a.Usage).Select(GetSliderSource);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             IEnumerable<DirectInputSource> dpads = new DirectInputSource[0];
             if (joystick.Capabilities.PovCount > 0)
             {
@@ -139,11 +159,27 @@ namespace XOutput.Devices.Input.DirectInput
             sources = buttons.Concat(axes).Concat(sliders).Concat(dpads).ToArray();
 
             joystick.Properties.AxisMode = DeviceAxisMode.Absolute;
+<<<<<<< HEAD
 
             joystick.Acquire();
             if (deviceInstance.ForceFeedbackDriverGuid != Guid.Empty)
             {
                 EffectInfo constantForce = joystick.GetEffects().FirstOrDefault(x => x.Guid == EffectGuid.ConstantForce);
+=======
+            try
+            {
+                ;
+                //joystick.SetCooperativeLevel(new WindowInteropHelper(Application.Current.MainWindow).Handle, CooperativeLevel.Background | CooperativeLevel.Exclusive);
+            }
+            catch(Exception)
+            {
+                Console.WriteLine($"[❌] Failed to set cooperative level to exclusive for {ToString()}");
+            }
+            joystick.Acquire();
+            if (deviceInstance.ForceFeedbackDriverGuid != Guid.Empty)
+            {
+                var constantForce = joystick.GetEffects().FirstOrDefault(x => x.Guid == EffectGuid.ConstantForce);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 if (constantForce == null)
                 {
                     force = joystick.GetEffects().FirstOrDefault();
@@ -152,7 +188,11 @@ namespace XOutput.Devices.Input.DirectInput
                 {
                     force = constantForce;
                 }
+<<<<<<< HEAD
                 DeviceObjectInstance[] actuatorAxes = joystick.GetObjects().Where(doi => doi.ObjectId.Flags.HasFlag(DeviceObjectTypeFlags.ForceFeedbackActuator)).ToArray();
+=======
+                var actuatorAxes = joystick.GetObjects().Where(doi => doi.ObjectId.Flags.HasFlag(DeviceObjectTypeFlags.ForceFeedbackActuator)).ToArray();
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 for (int i = 0; i < actuatorAxes.Length; i++)
                 {
                     if (i + 1 < actuatorAxes.Length)
@@ -166,6 +206,22 @@ namespace XOutput.Devices.Input.DirectInput
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+            // try
+            // {
+            //     logger.Info(joystick.Properties.InstanceName + " " + ToString());
+            //     logger.Info(PrettyPrint.ToString(joystick));
+            //     logger.Info(PrettyPrint.ToString(joystick.GetObjects()));
+            // } catch { }
+
+            // TODO
+
+            foreach (var obj in joystick.GetObjects())
+            {
+                Console.WriteLine("  " + obj.Name + " " + obj.ObjectId + " offset: " + obj.Offset + " objecttype: " + obj.ObjectType.ToString() + " " + obj.Usage);
+            }
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             state = new DeviceState(sources, joystick.Capabilities.PovCount);
             deviceInputChangedEventArgs = new DeviceInputChangedEventArgs(this);
             inputConfig = new InputConfig(ForceFeedbackCount);
@@ -193,7 +249,11 @@ namespace XOutput.Devices.Input.DirectInput
             {
                 disposed = true;
                 inputRefresher?.Interrupt();
+<<<<<<< HEAD
                 foreach (DirectDeviceForceFeedback actuator in actuators)
+=======
+                foreach (var actuator in actuators)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 {
                     actuator.Dispose();
                 }
@@ -255,7 +315,11 @@ namespace XOutput.Devices.Input.DirectInput
                 big = 0;
                 small = 0;
             }
+<<<<<<< HEAD
             foreach (DirectDeviceForceFeedback actuator in actuators)
+=======
+            foreach (var actuator in actuators)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             {
                 actuator.SetForceFeedback(big, small);
             }
@@ -277,15 +341,24 @@ namespace XOutput.Devices.Input.DirectInput
                     {
                         state.SetDPad(i, GetDPadValue(i));
                     }
+<<<<<<< HEAD
                     foreach (DirectInputSource source in sources)
+=======
+                    foreach (var source in sources)
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                     {
                         if (source.Refresh(GetCurrentState()))
                         {
                             state.MarkChanged(source);
                         }
                     }
+<<<<<<< HEAD
                     IEnumerable<InputSource> changes = state.GetChanges(force);
                     IEnumerable<int> dpadChanges = state.GetChangedDpads(force);
+=======
+                    var changes = state.GetChanges(force);
+                    var dpadChanges = state.GetChangedDpads(force);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                     if (changes.Any() || dpadChanges.Any())
                     {
                         deviceInputChangedEventArgs.Refresh(changes, dpadChanges);
@@ -309,7 +382,11 @@ namespace XOutput.Devices.Input.DirectInput
         /// <returns>Value</returns>
         private int GetAxisValue(int instanceNumber)
         {
+<<<<<<< HEAD
             JoystickState currentState = GetCurrentState();
+=======
+            var currentState = GetCurrentState();
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (instanceNumber < 0)
             {
                 throw new ArgumentException(nameof(instanceNumber));
@@ -376,7 +453,11 @@ namespace XOutput.Devices.Input.DirectInput
         /// <returns>Value</returns>
         private int GetSliderValue(int slider)
         {
+<<<<<<< HEAD
             JoystickState currentState = GetCurrentState();
+=======
+            var currentState = GetCurrentState();
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
             if (slider < 1)
             {
                 throw new ArgumentException(nameof(slider));
@@ -414,10 +495,17 @@ namespace XOutput.Devices.Input.DirectInput
         /// <returns><see cref="DirectInputTypes"/> of the axes</returns>
         private DeviceObjectInstance[] GetAxes()
         {
+<<<<<<< HEAD
             DeviceObjectInstance[] axes = joystick.GetObjects(DeviceObjectTypeFlags.AbsoluteAxis).Where(o => o.ObjectType != ObjectGuid.Slider).ToArray();
             foreach (DeviceObjectInstance axis in axes)
             {
                 ObjectProperties properties = joystick.GetObjectPropertiesById(axis.ObjectId);
+=======
+            var axes = joystick.GetObjects(DeviceObjectTypeFlags.AbsoluteAxis).Where(o => o.ObjectType != ObjectGuid.Slider).ToArray();
+            foreach (var axis in axes)
+            {
+                var properties = joystick.GetObjectPropertiesById(axis.ObjectId);
+>>>>>>> 713ec09460ab795f2f5676c92c9d7cb6bb0e7f09
                 try
                 {
                     properties.Range = new InputRange(ushort.MinValue, ushort.MaxValue);
