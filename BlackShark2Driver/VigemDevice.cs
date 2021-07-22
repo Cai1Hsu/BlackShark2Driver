@@ -52,7 +52,7 @@ namespace XOutput.Devices.XInput.Vigem
         /// <returns>If it was successful</returns>
         public bool Plugin(int controllerCount)
         {
-            var controller = client.CreateXbox360Controller();
+            IXbox360Controller controller = client.CreateXbox360Controller();
             controller.Connect();
             controllers.Add(controllerCount, controller);
             return true;
@@ -67,7 +67,7 @@ namespace XOutput.Devices.XInput.Vigem
         {
             if (controllers.ContainsKey(controllerCount))
             {
-                var controller = controllers[controllerCount];
+                IXbox360Controller controller = controllers[controllerCount];
                 controllers.Remove(controllerCount);
                 controller.Disconnect();
                 return true;
@@ -85,22 +85,22 @@ namespace XOutput.Devices.XInput.Vigem
         {
             if (controllers.ContainsKey(controllerCount))
             {
-                var controller = controllers[controllerCount];
-                foreach (var value in values)
+                IXbox360Controller controller = controllers[controllerCount];
+                foreach (KeyValuePair<XInputTypes, double> value in values)
                 {
                     if (value.Key.IsAxis())
                     {
-                        var mapping = axisMappings[value.Key];
+                        VigemXbox360AxisMapping mapping = axisMappings[value.Key];
                         controller.SetAxisValue(mapping.Type, mapping.GetValue(value.Value));
                     }
                     else if (value.Key.IsSlider())
                     {
-                        var mapping = sliderMappings[value.Key];
+                        VigemXbox360SliderMapping mapping = sliderMappings[value.Key];
                         controller.SetSliderValue(mapping.Type, mapping.GetValue(value.Value));
                     }
                     else
                     {
-                        var mapping = buttonMappings[value.Key];
+                        VigemXbox360ButtonMapping mapping = buttonMappings[value.Key];
                         controller.SetButtonState(mapping.Type, mapping.GetValue(value.Value));
                     }
                 }
@@ -111,7 +111,7 @@ namespace XOutput.Devices.XInput.Vigem
 
         public void Dispose()
         {
-            foreach (var controller in controllers.Values)
+            foreach (IXbox360Controller controller in controllers.Values)
             {
                 controller.Disconnect();
             }

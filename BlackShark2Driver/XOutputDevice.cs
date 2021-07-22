@@ -65,12 +65,12 @@ namespace XOutput.Devices.XInput
 
         public void UpdateSources(IEnumerable<IInputDevice> sources)
         {
-            foreach (var source in boundSources)
+            foreach (IInputDevice source in boundSources)
             {
                 source.InputChanged -= SourceInputChanged;
             }
             boundSources = sources;
-            foreach (var source in boundSources)
+            foreach (IInputDevice source in boundSources)
             {
                 source.InputChanged += SourceInputChanged;
             }
@@ -79,7 +79,7 @@ namespace XOutput.Devices.XInput
 
         public void Dispose()
         {
-            foreach (var source in boundSources)
+            foreach (IInputDevice source in boundSources)
             {
                 source.InputChanged -= SourceInputChanged;
             }
@@ -108,17 +108,17 @@ namespace XOutput.Devices.XInput
         public bool RefreshInput(bool force = false)
         {
             state.ResetChanges();
-            foreach (var s in sources)
+            foreach (XOutputSource s in sources)
             {
                 if (s.Refresh(mapper))
                 {
                     state.MarkChanged(s);
                 }
             }
-            var changes = state.GetChanges(force);
+            IEnumerable<InputSource> changes = state.GetChanges(force);
             dPads[0] = DPadHelper.GetDirection(GetBool(XInputTypes.UP), GetBool(XInputTypes.DOWN), GetBool(XInputTypes.LEFT), GetBool(XInputTypes.RIGHT));
             state.SetDPad(0, dPads[0]);
-            var changedDPads = state.GetChangedDpads(force);
+            IEnumerable<int> changedDPads = state.GetChangedDpads(force);
             if (changedDPads.Any() || changes.Any())
             {
                 deviceInputChangedEventArgs.Refresh(changes, changedDPads);
@@ -133,8 +133,8 @@ namespace XOutput.Devices.XInput
         /// <returns></returns>
         public Dictionary<XInputTypes, double> GetValues()
         {
-            var newValues = new Dictionary<XInputTypes, double>();
-            foreach (var source in sources)
+            Dictionary<XInputTypes, double> newValues = new Dictionary<XInputTypes, double>();
+            foreach (XOutputSource source in sources)
             {
                 newValues[source.XInputType] = source.Value;
             }

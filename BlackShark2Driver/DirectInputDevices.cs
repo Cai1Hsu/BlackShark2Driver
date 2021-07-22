@@ -16,7 +16,7 @@ namespace XOutput.Devices.Input.DirectInput
         private const string EmulatedSCPID = "028e045e-0000-0000-0000-504944564944";
 
         private readonly SharpDX.DirectInput.DirectInput directInput = new SharpDX.DirectInput.DirectInput();
-        
+
         ~DirectInputDevices()
         {
             Dispose();
@@ -56,14 +56,14 @@ namespace XOutput.Devices.Input.DirectInput
         {
             try
             {
-                var joystick = new Joystick(directInput, deviceInstance.InstanceGuid);
+                Joystick joystick = new Joystick(directInput, deviceInstance.InstanceGuid);
                 if (joystick.Information.ProductGuid.ToString() == EmulatedSCPID || (joystick.Capabilities.AxeCount < 1 && joystick.Capabilities.ButtonCount < 1))
                 {
                     joystick.Dispose();
                     return null;
                 }
                 joystick.Properties.BufferSize = 128;
-                var device = new DirectDevice(deviceInstance, joystick);
+                DirectDevice device = new DirectDevice(deviceInstance, joystick);
                 InputDevices.Instance.Add(device);
                 return device;
             }

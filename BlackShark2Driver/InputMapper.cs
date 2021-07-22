@@ -73,14 +73,14 @@ namespace XOutput.Devices.Mapper
         public void Attach(IEnumerable<IInputDevice> inputDevices)
         {
             inputs.Clear();
-            foreach (var mapping in Mappings)
+            foreach (KeyValuePair<XInputTypes, MapperDataCollection> mapping in Mappings)
             {
-                foreach (var mapperData in mapping.Value.Mappers)
+                foreach (MapperData mapperData in mapping.Value.Mappers)
                 {
                     bool found = false;
                     if (mapperData.InputDevice != null && mapperData.InputType != null)
                     {
-                        foreach (var inputDevice in inputDevices)
+                        foreach (IInputDevice inputDevice in inputDevices)
                         {
                             if (mapperData.InputDevice == inputDevice.UniqueId)
                             {
@@ -107,8 +107,7 @@ namespace XOutput.Devices.Mapper
         /// <returns></returns>
         protected static double TryReadValue(string data, double defaultValue = 0)
         {
-            double value;
-            if (double.TryParse(data, out value))
+            if (double.TryParse(data, out double value))
             {
                 return value / 100;
             }

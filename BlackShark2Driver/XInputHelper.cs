@@ -52,10 +52,10 @@ namespace XOutput.Devices.XInput
 
         public XOutputSource[] GenerateSources()
         {
-            var buttonSources = buttons.Select(b => new XOutputSource(b.ToString(), b));
-            var axisSources = axes.Select(a => new XOutputSource(a.ToString(), a));
-            var dpadSources = dPad.Select(d => new XOutputSource(d.ToString(), d));
-            var sliderSources = sliders.Select(d => new XOutputSource(d.ToString(), d));
+            IEnumerable<XOutputSource> buttonSources = buttons.Select(b => new XOutputSource(b.ToString(), b));
+            IEnumerable<XOutputSource> axisSources = axes.Select(a => new XOutputSource(a.ToString(), a));
+            IEnumerable<XOutputSource> dpadSources = dPad.Select(d => new XOutputSource(d.ToString(), d));
+            IEnumerable<XOutputSource> sliderSources = sliders.Select(d => new XOutputSource(d.ToString(), d));
             return buttonSources.Concat(axisSources).Concat(dpadSources).Concat(sliderSources).ToArray();
         }
 

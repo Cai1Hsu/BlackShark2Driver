@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using XOutput.Devices;
-using XOutput.Devices.Input;
 using XOutput.Devices.Input.DirectInput;
 using XOutput.Devices.Mapper;
 using XOutput.Devices.XInput.Vigem;
@@ -24,8 +19,7 @@ namespace BlackShark2Driver
             Console.WriteLine("Author : Cai1Hsu (x1052819745@163.com)");
             Console.WriteLine("---------------------------------------");
 
-            bool vigem = VigemDevice.IsAvailable();
-            if (vigem)
+            if (VigemDevice.IsAvailable())
             {
                 Console.WriteLine("[OK] Vigem is installed.");
             }
@@ -50,16 +44,16 @@ namespace BlackShark2Driver
                     inputdevices.Add(i);
                 }
             }
-            if(index == 0)
+            if (index == 0)
             {
-                Console.WriteLine("\a[!] No devices found.");
+                Console.WriteLine("\a[!] No device found.");
                 Console.ReadKey(true);
                 return;
             }
             int deviceNumber = -1;
             if (index == 1)
             {
-                Console.WriteLine("[!] The only device is chosen by default.");
+                Console.WriteLine("[!] The only device was chosen by default.");
                 deviceNumber = 0;
             }
             else
@@ -74,7 +68,7 @@ namespace BlackShark2Driver
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("[!] Invalid number, please retry.");
+                    Console.WriteLine("[!] Invalid number, please reinput.");
                     goto InputNumber;
                 }
             }
@@ -83,14 +77,16 @@ namespace BlackShark2Driver
 
             Console.WriteLine($"Chosen controller : {controller.InstanceName} {controller.InstanceGuid}");
             InputMapper inputMapper = JsonConvert.DeserializeObject<InputMapper>(Properties.Resources.Mapper.Replace("####", controller.InstanceGuid.ToString()));
-            
+
             GameController emulatedController = new GameController(inputMapper);
             Controllers.Instance.Add(emulatedController);
+            Console.WriteLine("[...] Starting");
 
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(1000);
             emulatedController.Start(null);
             Console.ReadKey(true);
             emulatedController.Stop();
+            Console.CursorVisible = true;
         }
     }
 }

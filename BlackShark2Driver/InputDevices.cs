@@ -5,7 +5,7 @@ namespace XOutput.Devices.Input
     public class InputDevices
     {
 
-        private static InputDevices instance = new InputDevices();
+        private static readonly InputDevices instance = new InputDevices();
         /// <summary>
         /// Gets the singleton instance of the class.
         /// </summary>
@@ -21,12 +21,6 @@ namespace XOutput.Devices.Input
         public void Add(IInputDevice inputDevice)
         {
             inputDevices.Add(inputDevice);
-            Controllers.Instance.Update(inputDevices);
-        }
-
-        public void Remove(IInputDevice inputDevice)
-        {
-            inputDevices.Remove(inputDevice);
             Controllers.Instance.Update(inputDevices);
         }
 

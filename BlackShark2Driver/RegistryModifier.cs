@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 
 namespace XOutput.Tools
@@ -28,7 +28,7 @@ namespace XOutput.Tools
         {
             get
             {
-                using (var key = GetRegistryKey())
+                using (RegistryKey key = GetRegistryKey())
                 {
                     bool exists = key.GetValue(AutostartValueKey) != null;
                     Console.WriteLine($"{AutostartValueKey} registry is " + (exists ? "" : "not ") + "found");
@@ -53,9 +53,9 @@ namespace XOutput.Tools
         /// </summary>
         public void SetAutostart()
         {
-            using (var key = GetRegistryKey())
+            using (RegistryKey key = GetRegistryKey())
             {
-                var filename = Process.GetCurrentProcess().MainModule.FileName;
+                string filename = Process.GetCurrentProcess().MainModule.FileName;
                 string value = $"\"{filename}\" {AutostartParams}";
                 key.SetValue(AutostartValueKey, value);
                 Console.WriteLine($"{AutostartValueKey} registry set to {value}");
@@ -67,7 +67,7 @@ namespace XOutput.Tools
         /// </summary>
         public void ClearAutostart()
         {
-            using (var key = GetRegistryKey())
+            using (RegistryKey key = GetRegistryKey())
             {
                 key.DeleteValue(AutostartValueKey);
                 Console.WriteLine($"{AutostartValueKey} registry is deleted");
@@ -81,7 +81,7 @@ namespace XOutput.Tools
 
         public static bool KeyExists(RegistryKey registryKey, string subkey)
         {
-            using (var registry = registryKey.OpenSubKey(subkey))
+            using (RegistryKey registry = registryKey.OpenSubKey(subkey))
             {
                 return registry != null;
             }
@@ -95,7 +95,7 @@ namespace XOutput.Tools
 
         public static void CreateKey(RegistryKey registryKey, string subkey)
         {
-            var registry = registryKey.CreateSubKey(subkey);
+            RegistryKey registry = registryKey.CreateSubKey(subkey);
             registry.Close();
         }
 
@@ -106,7 +106,7 @@ namespace XOutput.Tools
 
         public static void SetValue(RegistryKey registryKey, string subkey, string key, object value)
         {
-            using (var registry = registryKey.OpenSubKey(subkey, true))
+            using (RegistryKey registry = registryKey.OpenSubKey(subkey, true))
             {
                 registry.SetValue(key, value);
             }
