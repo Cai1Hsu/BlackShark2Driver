@@ -113,7 +113,15 @@ namespace XOutput.Devices.XInput.Vigem
         {
             foreach (IXbox360Controller controller in controllers.Values)
             {
-                controller.Disconnect();
+                try
+                {
+                    controller.Disconnect();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadKey(true);
+                }
             }
             client.Dispose();
         }

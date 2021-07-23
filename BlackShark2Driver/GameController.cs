@@ -47,7 +47,7 @@ namespace XOutput.Devices
         private readonly InputMapper mapper;
         private readonly XOutputDevice xInput;
         private readonly IXOutputInterface xOutputInterface;
-        private Thread thread;
+        // private Thread thread;
         private bool running;
         private int controllerCount = 0;
 
@@ -92,7 +92,7 @@ namespace XOutput.Devices
         /// <summary>
         /// Starts the emulation of the device
         /// </summary>
-        public int Start(Action onStop = null)
+        public int Start()
         {
             if (!HasXOutputInstalled)
             {
@@ -107,13 +107,10 @@ namespace XOutput.Devices
             }
             if (xOutputInterface.Plugin(controllerCount))
             {
-                thread = new Thread(() => ReadAndReportValues(onStop));
                 running = true;
-                thread.Name = $"Emulated controller {controllerCount} output refresher";
-                thread.IsBackground = true;
-                thread.Start();
                 Console.WriteLine($"Emulation started on {ToString()}.");
-                Console.WriteLine("[!] Press any key to exit.\nStatus: ");
+                Console.WriteLine("\n[!] Press Ctrl + C to exit.\n");
+                ReadAndReportValues();
             }
             else
             {
@@ -129,12 +126,11 @@ namespace XOutput.Devices
         {
             if (running)
             {
-                running = false;
                 XInput.InputChanged -= XInputInputChanged;
                 xOutputInterface?.Unplug(controllerCount);
                 Console.WriteLine($"Emulation stopped on {ToString()}.");
                 resetId();
-                thread?.Interrupt();
+                running = false;
             }
         }
 
@@ -143,7 +139,7 @@ namespace XOutput.Devices
             return DisplayName;
         }
 
-        private void ReadAndReportValues(Action onStop)
+        private void ReadAndReportValues()
         {
             try
             {
@@ -159,10 +155,8 @@ namespace XOutput.Devices
             {}
             finally
             {
-                onStop?.Invoke();
                 Stop();
             }
-            Stop();
         }
 
         private void XInputInputChanged(object sender, DeviceInputChangedEventArgs e)
