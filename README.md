@@ -1,5 +1,5 @@
 ## BlackShark2Driver
-黑鲨二代手柄的非官方驱动Unofficial driver for BlackShark2 Controller(Left)
+黑鲨二代手柄左翼非官方驱动 Unofficial driver for BlackShark2 Controller(Left)
 
 ## How to install
 
@@ -10,7 +10,7 @@
 - DirectX
 - Visual C++ Redistributable for Visual Studio 2015 32-bit
 - Visual C++ Redistributable for Visual Studio 2015 64-bit
-- .Net Framework 4
+- .Net 5.0
 
 ### Install 
 Download [stable release](https://github.com/Cai1Hsu/BlackShark2Driver/releases/latest) or build it with Visual Studio.
