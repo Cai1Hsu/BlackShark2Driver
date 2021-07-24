@@ -10,7 +10,7 @@
 - DirectX
 - Visual C++ Redistributable for Visual Studio 2015 32-bit
 - Visual C++ Redistributable for Visual Studio 2015 64-bit
-- .Net 5.0
+- [.Net 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ### Install 
 Download [stable release](https://github.com/Cai1Hsu/BlackShark2Driver/releases/latest) or build it with Visual Studio.
